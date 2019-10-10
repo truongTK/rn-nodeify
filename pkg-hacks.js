@@ -98,6 +98,20 @@ var hackers = [
     }
   },
   {
+    name: 'ts-nats',
+    regex: [
+      /tcptransport.js$/
+    ],
+    hack (file, contents) {
+      if (isInReactNative(file)) return
+
+      let fixed = contents
+      fixed = fixed.replace('&& this.stream.isPaused()', '')
+      fixed = fixed.replace('this.stream instanceof tls_1.TLSSocket', 'this.stream')
+      return contents === fixed ? null : fixed
+    }
+  },
+  {
     name: 'bluebird',
     regex: [
       /bluebird\/js\/main\/captured_trace\.js$/
