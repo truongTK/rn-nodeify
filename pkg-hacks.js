@@ -112,6 +112,19 @@ var hackers = [
     }
   },
   {
+    name: 'react-native-tcp',
+    regex: [
+      /TcpSocket.js$/
+    ],
+    hack (file, contents) {
+      if (isInReactNative(file)) return
+
+      let fixed = contents
+      fixed = fixed.replace('console.log.apply(console, args);', '')
+      return contents === fixed ? null : fixed
+    }
+  },
+  {
     name: 'bluebird',
     regex: [
       /bluebird\/js\/main\/captured_trace\.js$/
