@@ -121,6 +121,7 @@ var hackers = [
 
       let fixed = contents
       fixed = fixed.replace('console.log.apply(console, args);', '')
+      fixed = fixed.replace('var port = options.port || 0;', 'var port = options.port || 4222;')
       return contents === fixed ? null : fixed
     }
   },
